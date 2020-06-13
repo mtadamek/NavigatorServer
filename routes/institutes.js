@@ -14,6 +14,19 @@ const {
   NOT_FOUND,
 } = require("../constants/httpStatusCodes");
 
+/**
+ * @swagger
+ * /api/institutes:
+ *   get:
+ *     description: Pobieranie wszystkich instytutów.
+ *     responses:
+ *       200:
+ *         description: Pomyślne pobranie instytutów.
+ *       400:
+ *         description: Nieprawidłowe zapytanie.
+ *       500:
+ *         description: Problem z serwerem.
+ */
 router.get("/", async (req, res) => {
   try {
     const institutes = await Institute.find();
@@ -23,6 +36,48 @@ router.get("/", async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/institutes:
+ *   post:
+ *     description: Stworzenie nowego instytutu.
+ *     security:              
+ *       - JWT: [] 
+ *     consumes:
+ *       - multipart/form-data
+ *     parameters:
+ *       - in: formData
+ *         name: name
+ *         type: string
+ *         description: Nazwa instytutu.
+ *       - in: formData
+ *         name: address
+ *         type: string
+ *         description: Adres instytutu.
+ *       - in: formData
+ *         name: phone
+ *         type: string
+ *         description: Numer telefonu do sekreteriatu.
+ *       - in: formData
+ *         name: email
+ *         type: string
+ *         description: Email do instytutu.
+ *       - in: formData
+ *         name: office
+ *         type: string
+ *         description: Numer pokoju sekreteriatu.
+ *       - in: formData
+ *         name: image
+ *         type: file
+ *         description: Logo instytutu.
+ *     responses:
+ *       201:
+ *         description: Pomyślne stworzenie instytutu.
+ *       400:
+ *         description: Nieprawidłowe zapytanie.
+ *       500:
+ *         description: Problem z serwerem.
+ */
 router.post(
   "/",
   auth,

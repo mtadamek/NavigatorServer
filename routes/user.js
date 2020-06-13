@@ -39,6 +39,36 @@ router.post("/register", schema(USER), async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ *
+ * /api/user/login:
+ *   post:
+ *     description: Logowanie do panelu administracyjnego
+ *     consumes:
+ *       - application/json
+ *     parameters:
+ *       - in: body
+ *         name: Użytkownik
+ *         description: Parametry użytkownika.
+ *         schema:
+ *           type: object
+ *           required:
+ *             - login
+ *             - password
+ *           properties:
+ *             login:
+ *               type: string
+ *             password:
+ *               type: string
+ *     responses:
+ *       200:
+ *         description: Pobranie tokenu.
+ *       400:
+ *         description: Nieprawidłowe zapytanie.
+ *       500:
+ *         description: Problem z serwerem.
+ */
 router.post("/login", schema(USER), async (req, res) => {
   try {
     const { login, password } = req.body;
@@ -51,7 +81,6 @@ router.post("/login", schema(USER), async (req, res) => {
     const valid = await bcrypt.compare(password, user.password);
     if (!valid) throw "Invalid password!";
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
-    console.log(token);
     res.status(OK).header("auth-token", token).send(token);
   } catch (error) {
     res.status(BAD_REQUEST).send(error);
