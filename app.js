@@ -9,7 +9,7 @@ const swaggerUi = require("swagger-ui-express");
 //.ENV
 dotenv.config();
 
-const HOST_IP = process.env.HOST_IP;
+const HOST_IP = process.env.HOST_IP || "127.0.0.1";
 const PORT = process.env.PORT || 4444;
 
 //Swagger UI
@@ -18,7 +18,7 @@ const swaggerOptions = {
     info: {
       title: "Navigator API",
       description: "PK WM Navigator API information",
-      version: "0.1",
+      version: "1.0",
       contact: {
         name: "Politechnika Krakowska Wydział Mechaniczny",
       },

@@ -16,8 +16,37 @@ const {
 
 /**
  * @swagger
+ * definitions:
+ *   Institute:
+ *     type: object
+ *     required:
+ *       - name
+ *       - address
+ *       - email
+ *       - phone
+ *       - office
+ *       - image
+ *     properties:
+ *       name:
+ *         type: string
+ *       address:
+ *         type: string
+ *       email:
+ *         type: string
+ *       phone:
+ *         type: string
+ *       office:
+ *         type: string
+ *       image:
+ *         type: string
+ */
+
+/**
+ * @swagger
  * /api/institutes:
  *   get:
+ *     tags:
+ *       - "Institutes"
  *     description: Pobieranie wszystkich instytutów.
  *     responses:
  *       200:
@@ -40,6 +69,8 @@ router.get("/", async (req, res) => {
  * @swagger
  * /api/institutes:
  *   post:
+ *     tags:
+ *       - "Institutes"
  *     description: Stworzenie nowego instytutu.
  *     security:              
  *       - JWT: [] 

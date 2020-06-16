@@ -15,6 +15,21 @@ const {
 } = require("../constants/httpStatusCodes");
 const { USER } = require("../constants/validationTypes");
 
+/**
+ * @swagger
+ * definitions:
+ *   User:
+ *     type: object
+ *     required:
+ *       - login
+ *       - password
+ *     properties:
+ *       login:
+ *         type: string
+ *       password:
+ *         type: string
+ */
+
 router.post("/register", schema(USER), async (req, res) => {
   try {
     const { login, password } = req.body;
@@ -44,6 +59,8 @@ router.post("/register", schema(USER), async (req, res) => {
  *
  * /api/user/login:
  *   post:
+ *     tags:
+ *       - "Users"
  *     description: Logowanie do panelu administracyjnego
  *     consumes:
  *       - application/json

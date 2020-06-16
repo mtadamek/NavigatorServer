@@ -16,8 +16,49 @@ const {
 
 /**
  * @swagger
+ * definitions:
+ *   Employee:
+ *     type: object
+ *     required:
+ *       - forename
+ *       - surname
+ *       - gender
+ *       - degree
+ *       - email
+ *       - office
+ *       - instituteId
+ *     properties:
+ *       forename:
+ *         type: string
+ *       surname:
+ *         type: string
+ *       gender:
+ *         type: string
+ *         enum: ['male', 'female']
+ *       degree:
+ *         type: string
+ *       email:
+ *         type: string
+ *       phone:
+ *         type: string
+ *       office:
+ *         type: string
+ *       consultation:
+ *         type: array
+ *         items:
+ *           type: string
+ *       image:
+ *         type: string
+ *       instituteId:
+ *         type: string
+ */
+
+/**
+ * @swagger
  * /api/employees:
  *   get:
+ *     tags:
+ *       - "Employees"
  *     description: Pobieranie wszystkich pracowników lub tylko z danego instytutu.
  *     parameters:
  *       - in: query
@@ -48,6 +89,8 @@ router.get("/", async (req, res) => {
  * @swagger
  * /api/employees:
  *   post:
+ *     tags:
+ *       - "Employees"
  *     description: Dodanie nowego pracownika.
  *     security:
  *       - JWT: []
